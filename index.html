@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>VideoComposer</title>
+	<link rel="stylesheet" href="https://gw.alicdn.com/imgextra/i3/O1CN01n9wUIv26XN415nWwN_!!6000000007671-0-tps-703-704.jpg">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />     -->
+	<link href="css/templatemo-style.css" rel="stylesheet" />
+	<link href="css/new-style.css" rel="stylesheet" />
+	<link href="css/two_style.css" rel="stylesheet" />
+
+</head>
+
+<body> 
+
+	<div class="container">
+		<div class="placeholder">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="https://gw.alicdn.com/imgextra/i2/O1CN01vtOJz724FqgE6t8Gu_!!6000000007362-0-tps-1789-770.jpg">
+				<div class="tm-header">
+					<div class="row tm-header-inner">
+						<div class="col-md-6 col-12" style="display: inline-flex;">
+							<img src="https://gw.alicdn.com/imgextra/i3/O1CN01Dko8nq1a3XZ41bOe8_!!6000000003274-2-tps-60-60.png" alt="Logo" class="tm-site-logo" /> 
+							<div class="tm-site-text-box">
+								<!-- <h1 class="tm-site-title" style="height: 1rem;">as</h1> -->
+								<h1 class="tm-site-title">VideoCompoer</h1>
+								<h6 class="tm-site-description">New generation of video content creation.</h6>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<main>
+			<header class="row tm-welcome-section">
+				<h2 class="col-12 text-center tm-section-title">VideoComposer: Compositional Video Synthesis <br/> with Motion Controllability</h2>
+				<p class="col-12 text-center author-section">
+					<a class="author-section-a" href="#">Xiang Wang<sup>1*</sup></a>, 
+					<a class="author-section-a" href="#">Hangjie Yuang<sup>1*</sup></a>,
+					<a class="author-section-a" href="#">Shiwei Zhang<sup>1*</sup></a>,
+					<a class="author-section-a" href="#">Dayou Chen<sup>1*</sup></a>,
+					<a class="author-section-a" href="#">Jiuniu Wang<sup>1</sup></a>,
+					<br/>
+					<a class="author-section-a" href="#">Yingya Zhang<sup>1</sup></a>,
+					<a class="author-section-a" href="#">Yujun Shen<sup>2</sup></a>,
+					<a class="author-section-a" href="#">Deli Zhao<sup>1</sup></a>,
+					<a class="author-section-a" href="#">Jingren Zhou<sup>1</sup></a>
+				</p>
+				
+				<p class="col-12 text-center affiliation-section">
+					<a class="author-section-a"><sup>1</sup>Alibaba Group</a>, 
+					<a class="author-section-a"><sup>2</sup>Ant Group</a>
+				</p>
+
+				<p class="col-12 text-center abstract-section" style="word-break:break-all;word-wrap:break-word">
+					The pursuit of controllability as a higher standard of visual content creation has yielded remarkable progress in customizable image synthesis.
+					However, achieving controllable video synthesis remains challenging due to the large variation of temporal dynamics and the requirement of cross-frame temporal consistency.
+					Based on the paradigm of compositional generation, this work presents VideoCompoer that allows users to flexibly compose a video with textual conditions, spatial conditions, and more importantly temporal conditions.
+					Specifically, considering the characteristic of video data, we introduce the motion vector from compressed videos as an explicit control signal to provide guidance regarding temporal dynamics.
+					In addition, we develop a Spatio-Temporal Condition encoder (STC-encoder) that serves as a unified interface to effectively incorporate the spatial and temporal relations of sequential inputs, with which the model could make better use of temporal conditions and hence achieve higher inter-frame consistency.
+					Extensive experimental results suggest that VideoCompoer is able to control the spatial and temporal patterns simultaneously within a synthesized video in various forms, such as text description, sketch sequence, reference video, or even simply hand-crafted motions.
+					Code and models will be made publicly available.
+				</p>
+				
+			</header>
+			
+			<div class="tm-paging-links" style="margin-bottom: 1rem;">
+				<nav>
+					<ul>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link active">Paper</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Code</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Models</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+			<!-- <p class="col-12 text-center abstract-section tm-paging-links" style="word-break:break-all;word-wrap:break-word; color: lightseagreen;">
+				We are currently seeking research interns. If you are interested in video generation, please do not hesitate to email <br \> us your resume at the following address:
+				<a style="color: lightseagreen; font-size: 1.2rem; font-weight: bold"> zhangjin.zsw@alibaba-inc.com </a>
+			</p> -->
+
+			<div class="gray_div font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Overview: <i>Compositional Video Synthesis</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 mb-6 text-center">
+					<!-- Synthesize videos in any style you can imagine using nothing but a text prompt. If you can say it, now you can see it. -->
+					<!-- You can generate videos flexibly in any style that you can imagine. -->
+					The real source of art is your imagination, and VideoComposer is the solution for bringing it to life.
+				</div>
+				
+				<div class="video-style">
+					<center>
+						<video class="video-center" width="896" height="504" controls>
+							<source src="https://cloud.video.taobao.com/play/u/null/p/1/e/6/t/1/412500082019.mp4?SBizCode=xiaoer" type="video/mp4">
+						</video>
+					</center> 
+				</div>
+				<div class="block_bottom">
+				</div>
+			</div>
+
+			<div class=" font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 1: <i>Compositional Video Synthesis</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					You can generate videos flexibly in any style that you can imagine.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01BoPetW1Fmml6HsNbz_!!6000000000530-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PcTmSF225CEpBJ4ug_!!6000000007068-2-tps-256-256.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Sketch</h4>
+									<p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01bWx6Ah1R8H7JzRInY_!!6000000002066-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01hkqnU21zJu6pKi1F4_!!6000000006694-2-tps-268-268.png" />
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01K3uzBK1VBG9z6BWeN_!!6000000002614-2-tps-256-256.png"/>
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Image + Depth</h4>
+									<p class="tm-gallery-description" style="color: darkgray;">None</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01Zcb9QU1sW5KhAvCph_!!6000000005773-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01DeuxtL23umShN8dkA_!!6000000007316-0-tps-320-320.jpg"/>
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01ciYGVl1jqqkMREpbh_!!6000000004600-0-tps-336-336.jpg"/>
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01K3uzBK1VBG9z6BWeN_!!6000000002614-2-tps-256-256.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01xyKJaa1M45PqNmJZK_!!6000000001380-2-tps-256-256.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Style + Depth + Sketch + Motions</h4>
+									<p class="tm-gallery-description" style="color: darkgray;">None</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01yTUbjp1qzjk3v5O5Q_!!6000000005567-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01fmNltI1lq3HsI1Lu7_!!6000000004869-0-tps-326-327.jpg"/>
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01lMhWYo1KD802vVUtK_!!6000000001129-0-tps-338-338.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Style + Hand-crafted Sketch + Hand-crafted motions</h4>
+									<p class="tm-gallery-description">"A moving golden moon"</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+				</div>
+			</div>
+			
+
+			<div class="gray_div font-serif rw-r-container" >
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 2: <i>Compositional image-to-video synthesis</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Give me a picture, and I will describe a beautiful, vivid and living world for you.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN012AJ41u1wbMM53fLVT_!!6000000006326-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01vRZFUF1daSsmgrCCI_!!6000000003752-2-tps-512-512.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">“Tiger”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01t7isyC1JPfEFZmXS5_!!6000000001021-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01aJeTpd1xZodeCGucl_!!6000000006458-0-tps-512-512.jpg"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01fy4NYb1iwyQXNpyfK_!!6000000004478-2-tps-258-256.png"/>
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Motions</h4>
+									<p class="tm-gallery-description">“Tiger”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RMO2UC1uJpyIRDyqL_!!6000000006017-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01DvuhhY1Kje7WldXvx_!!6000000001200-2-tps-514-512.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">"Smiling woman in cowboy hat with wheat ears"</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01iNxbB41LoyLPcdNPd_!!6000000001347-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_003_SImage.png"/>
+									<img src="../videocomposer_source/videos/Fig04_004_Motions.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01DvuhhY1Kje7WldXvx_!!6000000001200-2-tps-514-512.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN010k7nGE22Ge8l0kfBL_!!6000000007093-2-tps-258-256.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Motions</h4>
+									<p class="tm-gallery-description">"Smiling woman in cowboy hat with wheat ears"</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<!-- gallery page 2 -->
+					<div id="tm-gallery-page-salad" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_005.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01DAqVvT1Nfvl0vUjMn_!!6000000001598-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig04_005_SImage.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PsMiQp1PLRGf3xSDi_!!6000000001824-2-tps-512-514.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">"Bouquet of the yellow leaves. Autumn girl walking in city park"</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_006.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01HJzvAY1Bvi0qkqAbM_!!6000000000008-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_005_SImage.png"/>
+									<img src="../videocomposer_source/videos/Fig04_006_Depth.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PsMiQp1PLRGf3xSDi_!!6000000001824-2-tps-512-514.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01XPevCo1kR22I5qosB_!!6000000004679-2-tps-260-260.png"/>
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Depth</h4>
+									<p class="tm-gallery-description">"Bouquet of the yellow leaves. Autumn girl walking in city park"</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_007.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01Zf8zpF1IxGfhMBgvO_!!6000000000959-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_007_SImage.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01V14FMI1IXcUVqz4eh_!!6000000000903-2-tps-514-514.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">"Smiling woman in cowboy hat with wheat ears"</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_008.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN017meFUw1WutEir9Dz6_!!6000000002849-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_007_SImage.png"/>
+									<img src="../videocomposer_source/videos/Fig04_008_Depth.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01QoAUxd1eItImgcQFw_!!6000000003849-2-tps-514-514.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01fngukF1ZyxbR2B4gU_!!6000000003264-2-tps-258-260.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Depth</h4>
+									<p class="tm-gallery-description">“Honey bee collecting pollen on a blooming sunflower”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+
+					<!-- gallery page 3 -->
+					<div id="tm-gallery-page-salad" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_009.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN019xhltl1jdZGIUdlz4_!!6000000004571-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig04_009_SImage.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN0126Na851pYQVYu5E63_!!6000000005372-2-tps-514-514.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">“The Matterhorn  with flowers in the foreground”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_010.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01HxvoLd1OAcIKl6bX5_!!6000000001665-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_009_SImage.png"/>
+									<img src="../videocomposer_source/videos/Fig04_010_Sketch.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN0126Na851pYQVYu5E63_!!6000000005372-2-tps-514-514.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01X5N2J01Yj6GuIzb31_!!6000000003094-2-tps-258-258.png"/>
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Sketch</h4>
+									<p class="tm-gallery-description">“The Matterhorn  with flowers in the foreground”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_011.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01SFbtHi1pbdHbIUTCT_!!6000000005379-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_011_SImage.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01O8FlCk1yKzQqenEXR_!!6000000006561-2-tps-514-514.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image</h4>
+									<p class="tm-gallery-description">“Aerial HA track over Bosphorus in Istanbul ”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig04_012.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01eermG21pyX5P8kgXR_!!6000000005429-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig04_011_SImage.png"/>
+									<img src="../videocomposer_source/videos/Fig04_012_Sketch.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01O8FlCk1yKzQqenEXR_!!6000000006561-2-tps-514-514.png"/>
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01VajTgK22JOVzlGWyH_!!6000000007099-2-tps-258-258.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Image + Depth</h4>
+									<p class="tm-gallery-description">“Aerial HA track over Bosphorus in Istanbul ”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 3 -->
+				</div>
+			</div>
+			
+			<div class=" font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 3: <i>Compositional video inpainting</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Give me a broken time, and I will restore it to its most beautiful moment for you.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_Mask.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01FcNQgv20PEKTJDPOZ_!!6000000006841-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01bHXpeB1rz6oZoi4bn_!!6000000005701-0-tps-600-600.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Masked Videos</h4>
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<p class="tm-gallery-description" style="color: darkgray;"></p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_and_T1.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01U0eNKh1qr2DZstKH6_!!6000000005548-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01bHXpeB1rz6oZoi4bn_!!6000000005701-0-tps-600-600.jpg"/>
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask</h4>
+									<p class="tm-gallery-description">“Swan lazily drifting and trimming itself on a calm river”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_and_T1_Depth.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01YWshTG1NNbukUD664_!!6000000001558-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_Depth.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01XG4ovB1ThCYGxxSBV_!!6000000002413-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask + Depth</h4>
+									<p class="tm-gallery-description">“Swan lazily drifting and trimming itself on a calm river”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_and_T1_Sketch.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01RDpQnv1tSFdM8EUM2_!!6000000005900-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_Sketch.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01QNQlgP1JnToyw2CZn_!!6000000001073-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask + Sketch</h4>
+									<p class="tm-gallery-description">“Black swan lazily drifting and trimming itself on a calm river”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+					
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_Mask.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01hKrGQ626K5ZsaYhGt_!!6000000007642-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01bHXpeB1rz6oZoi4bn_!!6000000005701-0-tps-600-600.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Masked Videos</h4>
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<p class="tm-gallery-description" style="color: darkgray;"></p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_and_T3.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01Tvx2VG22iaIcgOX77_!!6000000007154-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01bHXpeB1rz6oZoi4bn_!!6000000005701-0-tps-600-600.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask</h4>
+									<p class="tm-gallery-description">“Coastal view of Cleveland Road and Robin Hood's Bay, blue sky and sea with white clouds”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_and_T3_Depth.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01uXT5Za1RywfE44Czo_!!6000000002181-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_Depth.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01idcNbU1EMOJsaZ9gr_!!6000000000337-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask + Depth</h4>
+									<p class="tm-gallery-description">“Coastal view of Cleveland Road and Robin Hood's Bay, blue sky and sea with white clouds”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_and_T3_Sketch.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN017vvQBK1NLJw3Mq32P_!!6000000001553-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig05_02_Sketch.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN011ZwATF1S5obaTJn11_!!6000000002196-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Mask + Sketch</h4>
+									<p class="tm-gallery-description">“Coastal view of Cleveland Road and Robin Hood's Bay, blue sky and sea with white clouds”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+				</div>
+			</div>
+
+
+			<div class="gray_div font-serif rw-r-container" >
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 4: <i>Compositional sketch-to-video generation</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Give me a little hint, and I will showcase the beauty within your heart.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_01_Sketch.png" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01VN73tj1JkH37Vry7B_!!6000000001066-2-tps-384-384.png" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Hand Drawings</h4>
+									<p class="tm-gallery-description" style="color: darkgray;"></p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_01_Txt.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01TeqptR1H9yQNzN7UM_!!6000000000716-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig04_002_Motions.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch</h4>
+									<p class="tm-gallery-description">“Pigeon sits on a stone with an iron net behind it”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_01_Txt_Mask.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ceP4FD1KEVBxgP3Wu_!!6000000001132-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig06_01_Mask.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01qQstkt1asNWhREBwo_!!6000000003385-1-tps-384-384.gif"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch + Mask</h4>
+									<p class="tm-gallery-description">“Pigeon sits on a stone with an iron net behind it”</p>
+								</figcaption>
+							</figure>
+						</article>
+						
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg" alt="Image" class="img-fluid tm-gallery-img"/>
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title"></h4>
+									<p class="tm-gallery-description"></p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Sketch.png" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01A83C8Q25xeAg0tA90_!!6000000007593-2-tps-384-384.png" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Hand Drawings</h4>
+									<p class="tm-gallery-description" style="color: darkgray;"></p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Txt.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01CnFW3S28DnMrEvVpg_!!6000000007899-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig04_002_Motions.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch</h4>
+									<p class="tm-gallery-description">“A beautiful woman looking at camera in office”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Txt_Style.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN0163Wooh1R0wmPs3XxI_!!6000000002050-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01ofjaxW279NwJMxCsl_!!6000000007754-2-tps-896-806.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch + Style</h4>
+									<p class="tm-gallery-description">“A beautiful woman looking at camera in office”</p>
+								</figcaption>
+							</figure>
+						</article>
+						
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Txt_Style2.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01Lk5ccq1bYyMQ2BaiT_!!6000000003478-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig06_02_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01ofjaxW279NwJMxCsl_!!6000000007754-2-tps-896-806.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch + Style</h4>
+									<p class="tm-gallery-description">“A beautiful woman looking at camera in office”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Sketch.png" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01FmVO901GczuULjQPs_!!6000000000644-2-tps-384-384.png" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig05_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Hand Drawings</h4>
+									<p class="tm-gallery-description" style="color: darkgray;"></p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Txt.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01jo5Xmz1fipLbfihbK_!!6000000004041-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig04_002_Motions.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch</h4>
+									<p class="tm-gallery-description">“Red-backed Shrike lanius collurio”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Style.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN017mjo1j1u0bL1UyE02_!!6000000005975-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011G2vec23opJR2RQDw_!!6000000007303-2-tps-562-562.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch + Style</h4>
+									<p class="tm-gallery-description">“Red-backed Shrike lanius collurio”</p>
+								</figcaption>
+							</figure>
+						</article>
+						
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Style1.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN019aVytY1UYKUhCyVBl_!!6000000002529-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig06_03_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011G2vec23opJR2RQDw_!!6000000007303-2-tps-562-562.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Single Sketch + Style</h4>
+									<p class="tm-gallery-description">“Red-backed Shrike lanius collurio”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 3 -->
+
+				</div>
+			</div>
+
+
+			<div class=" font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 6: <i>Versatile motion control using hand-crafted motions</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Tell me how beauty moves with simple strokes, and I will bring it to life for you.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Txt_Motion_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01ynaapn1uMaLkmiIuc_!!6000000006023-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01fmNltI1lq3HsI1Lu7_!!6000000004869-0-tps-326-327.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ZYSHBO20kkwjLkXui_!!6000000006888-2-tps-338-338.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A moving golden moon”</p>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Txt_Motion_02.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01aDZp9r1nAUa2Xlnt1_!!6000000005049-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01fmNltI1lq3HsI1Lu7_!!6000000004869-0-tps-326-327.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_02.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN015pfzXx1lfWBDcryYH_!!6000000004846-0-tps-338-338.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A moving golden moon”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Txt_Motion_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN019ut59c1RHR2Jtl9nT_!!6000000002086-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01fmNltI1lq3HsI1Lu7_!!6000000004869-0-tps-326-327.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_03.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01RPlRjA1V4ODcdSVky_!!6000000002599-0-tps-336-338.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A moving golden moon”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Txt_Motion_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01Btas5P1b4kDotbWVN_!!6000000003412-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Style.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01fmNltI1lq3HsI1Lu7_!!6000000004869-0-tps-326-327.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_04.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01zkcwpQ1D4F0SYdcg7_!!6000000000162-0-tps-338-338.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A moving golden moon”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_02_Txt_Motion.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01tCgBAO27D36cUDC3g_!!6000000007762-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig07_03_Motion.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01Qmgr0Z1oSBUtIzQuX_!!6000000005223-0-tps-294-292.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.jpg"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A tiger walking on the grassland”</p>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig07_03_Txt_Motion.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN015Bzghl24Evt4nEUWI_!!6000000007360-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig07_03_Motion.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01Qmgr0Z1oSBUtIzQuX_!!6000000005223-0-tps-294-292.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A moving box”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<!-- <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									 <img src="../videocomposer_source/videos/Fig00_01_White.jpg" alt="Image" class="img-fluid tm-gallery-img" /> 
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011o9v1z1kMuTE4XhTR_!!6000000004670-0-tps-600-600.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									 <img src="../videocomposer_source/videos/Fig00_01_White.jpg"/> 
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011o9v1z1kMuTE4XhTR_!!6000000004670-0-tps-600-600.jpg"/>
+								</div>
+								<figcaption>
+								</figcaption>
+							</figure>
+						</article>  -->
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN017uIHxN1ks3P4c4jly_!!6000000004738-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_00.gif"/>
+									<img src="../videocomposer_source/videos/Fig08_02_SImage.png"/> -->
+									<!-- <img src="https://gw.alicdn.com/imgextra/i4/O1CN01ul6Jmo1hotpMsyEaf_!!6000000004325-1-tps-256-256.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN019k0aMW23oMurFbIwp_!!6000000007302-2-tps-256-256.png"/>
+									<!-- <img src="Fig08_MV_01.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01SMahv924p7B4CObdI_!!6000000007439-2-tps-320-320.png"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Image + Hand-crafted Motions</h4>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="Fig07_04_Txt_Motion.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01SMpn2p1zLjgyhCctT_!!6000000006698-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="Fig07_04_Motion.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01gDnZRo1FXfgjlNda7_!!6000000000497-0-tps-548-462.jpg"/>
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Text + Hand-crafted Motions</h4>
+									<p class="tm-gallery-description">“A golden five-pointed star”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+				</div>
+			</div>
+
+
+			<div class="gray_div font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 7: <i>Motion Transfer</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					If she is beautiful, I will create an even more beautiful one for you.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_01_SImage.jpg" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01kW3jOM1Q9opqqJ1FP_!!6000000001934-0-tps-1446-1348.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN016DquMs1cQ6Iv3DeyA_!!6000000003594-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_01.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01riTPoO1OflE3dY3bT_!!6000000001733-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_02.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01zLotWs1CGJpxAEaN9_!!6000000000053-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_02.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01HFNhTR1kA5NkqGebf_!!6000000004642-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_00.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01owOMh31KnJI8eTKGL_!!6000000001208-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_00.gif"/>
+									<img src="../videocomposer_source/videos/Fig08_02_SImage.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ul6Jmo1hotpMsyEaf_!!6000000004325-1-tps-256-256.gif"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01HaOwOn1HGqMp5viti_!!6000000000731-0-tps-958-904.jpg"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_05.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01c2TZ3c1ubhPqM6Qo1_!!6000000006056-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_03.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01mdltYR1j9nW1s04WO_!!6000000004506-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Output_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01qywJig1LY1glwpZxY_!!6000000001310-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig08_Input_03.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01mdltYR1j9nW1s04WO_!!6000000004506-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_Gray.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01R07dAL1aqXwQjwlmk_!!6000000003381-0-tps-598-598.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+				</div>
+			</div>
+
+
+			<div class=" font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 8: <i>Video Translation</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					If you want it to be better and become the way you want it to be, just tell me in a nutshell.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Input_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01eLtX3j1lZZ1vXosgb_!!6000000004833-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Output_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01ALyb6V1zrL1MO2TNO_!!6000000006767-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Output Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Input_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01B0TEbN1pgfdepQDPk_!!6000000005390-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Output_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01iynNHN1f1m7IS43Gq_!!6000000003947-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Output Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Input_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01acfbhW1IhhCgMUGph_!!6000000000925-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Output_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01JDKPFv1JKcs5wuWAZ_!!6000000001010-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Output Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Input_02.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01dNHPGY1RDJTIvn6Vo_!!6000000002077-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Input Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig09_Output_02.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01rBOvCB1rrK53gDbda_!!6000000005684-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig07_01_Motion_01.png"/> -->
+								</div>
+								<figcaption>
+									<h4 class="tm-gallery-title">Output Video</h4>
+									<!-- <p class="tm-gallery-description">“A moving golden moon”</p>  -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+
+				</div>
+			</div>
+
+
+			<div class="gray_div font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 9: <i>Video Style Transfer</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Seemingly nothing is impossible, if you dare to imagine and dare to act.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_01_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01aoM8kT1ySJlekNEHm_!!6000000006577-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_03.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01eO4lDD1dPvlqjLlJK_!!6000000003729-0-tps-320-320.jpg"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_01_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01uyKmTE1wCAZXs13aa_!!6000000006271-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_04.jpeg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ClmwnE1EhSXPO2n24_!!6000000000383-0-tps-320-320.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_01_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01oGXEJW1DdVVIaO9GY_!!6000000000239-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_01.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PC5spS1pIr2nkIL4x_!!6000000005338-2-tps-320-320.png"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_01_05.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01Cfwxbp28OmsBKB5YE_!!6000000007923-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_05.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01GVZrol21msOUXuzmr_!!6000000007028-2-tps-320-320.png"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.png"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_02_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01MH7vF21CU3ibua4Q8_!!6000000000083-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_03.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01eO4lDD1dPvlqjLlJK_!!6000000003729-0-tps-320-320.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_02_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01a4YMVm1UaA4r8J2oF_!!6000000002533-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_04.jpeg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ClmwnE1EhSXPO2n24_!!6000000000383-0-tps-320-320.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_02_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01yoTQ6I1kW4OP2EmV3_!!6000000004690-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_01.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PC5spS1pIr2nkIL4x_!!6000000005338-2-tps-320-320.png"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_02_05.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01glvnfy1Cgso47mGIy_!!6000000000111-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_05.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01GVZrol21msOUXuzmr_!!6000000007028-2-tps-320-320.png"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_03_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN017No3RY1It96fwcaM4_!!6000000000950-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_03.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01eO4lDD1dPvlqjLlJK_!!6000000003729-0-tps-320-320.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<!-- <p class="tm-gallery-description">“Rotation view of a beautiful long haired woman standing in the forest”</p> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_03_04.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01h52DzJ1sPDONa3hVM_!!6000000005758-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_04.jpeg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ClmwnE1EhSXPO2n24_!!6000000000383-0-tps-320-320.jpg"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_03_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01dMDJmW1NJwkJjVEp1_!!6000000001550-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_01.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01PC5spS1pIr2nkIL4x_!!6000000005338-2-tps-320-320.png"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig10_03_05.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01Za7duD1I5gKeGAdW6_!!6000000000842-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig10_Style_05.png"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01GVZrol21msOUXuzmr_!!6000000007028-2-tps-320-320.png"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 3 -->
+				</div>
+
+			</div>
+
+
+			<div class=" font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 10: <i>Compositional sketch sequence-to-video generation</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					If it is beautiful, then we can also have it.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_03_generate.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01MaCzWL279qKmtTQeS_!!6000000007755-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig11_03_Cond.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01G4B2EW1ZoQUclxXp7_!!6000000003241-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<p class="tm-gallery-description">“Girl holding christmas lights”</p>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_03_generate_Style.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01uxuDfv1eABmF9LEuL_!!6000000003830-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_03_Cond.gif"/>
+									<img src="../videocomposer_source/videos/Fig11_Style_01.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01G4B2EW1ZoQUclxXp7_!!6000000003241-1-tps-256-256.gif"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01AjcsYI1YO23LUWxih_!!6000000003048-0-tps-1242-1258.jpg"/>
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<p class="tm-gallery-description">“Girl holding christmas lights”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_02_Generate.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01xNtCyG22qpQWTFQrS_!!6000000007172-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_02_Cond.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01NwAByc1uQFW198gke_!!6000000006031-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.png"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<p class="tm-gallery-description">“Woman designer making pattern for new dress”</p>
+								</figcaption>
+							</figure>
+						</article>
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_02_Generate_Style.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01y3Y9o81nonR0Jy3Kp_!!6000000005137-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_01_Cond.gif"/>
+									<img src="../videocomposer_source/videos/Fig11_Style_01.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01aDA05G1vUewgCn4Pp_!!6000000006176-1-tps-256-256.gif"/>
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01AjcsYI1YO23LUWxih_!!6000000003048-0-tps-1242-1258.jpg"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<p class="tm-gallery-description">“Woman designer making pattern for new dress”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_01_generate.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01y2ilHq1qnN373ExfH_!!6000000005540-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_01_Cond.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01aDA05G1vUewgCn4Pp_!!6000000006176-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<p class="tm-gallery-description">“Luxury expensive table serving for a romantic dinner with candles”</p>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_04_generate.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01ntmVBz1YJS5jyLzeG_!!6000000003038-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_04_cond.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01XQY3uz29HkOuXvDEL_!!6000000008043-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_002_Depth.png"/> -->
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<p class="tm-gallery-description">“A lighthouse is near the sea”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig11_05_generate.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN01wptLb21l32uXTlvlM_!!6000000004762-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig11_05_cond.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01NVN8pX1YftV0eFgsV_!!6000000003087-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig01_004_Motions.jpg"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<p class="tm-gallery-description">“Water is poured into the beer mug”</p>
+								</figcaption>
+							</figure>
+						</article>
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_White.jpg" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011o9v1z1kMuTE4XhTR_!!6000000004670-0-tps-600-600.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig00_01_White.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i1/O1CN011o9v1z1kMuTE4XhTR_!!6000000004670-0-tps-600-600.jpg"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 2 -->
+
+				</div>
+			</div>
+
+			<div class="gray_div font-serif rw-r-container">
+				<div class="text-2xl lg:text-4xl leading-none pb-2 text-center">
+					Ability 12: <i>Compositional depth sequence-to-video generation</i>
+				</div>
+				<div class="text-base lg:text-lg pb-5 text-center ">
+					Give me some simple sketches, and I will turn them into the most beautiful moments for you.
+				</div>
+				
+				<!-- Gallery -->
+				<div class="row tm-gallery">
+					<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Output_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01XVfGPi1YmJ2jtmz3n_!!6000000003101-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Condition_01.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN016bsqk41nUBbwjD9FR_!!6000000005092-1-tps-384-384.gif"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Input Single Image</h4> -->
+									<p class="tm-gallery-description">“Yellow daffodils open up their blossoms”</p>
+									<!-- <p class="tm-gallery-description"></p> -->
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Output_Style_01.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN01qAF6Gy1a1hykbJ0vv_!!6000000003270-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Condition_01.gif"/>
+									<img src="../videocomposer_source/videos/Fig12_Style_01.jpg"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i4/O1CN016bsqk41nUBbwjD9FR_!!6000000005092-1-tps-384-384.gif"/>
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01ppTsKv219UKl6DxML_!!6000000006942-0-tps-1094-1100.jpg"/>
+								</div>
+								
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<p class="tm-gallery-description">“Yellow daffodils open up their blossoms”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Output_02.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01I7jRTi1YO23Igy2b5_!!6000000003048-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Condition_02.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01RFvyWP1caB15YjWdD_!!6000000003616-1-tps-256-256.gif"/>
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title">Text + Motions</h4> -->
+									<p class="tm-gallery-description">“Fun horse - 3D Animation”</p>
+								</figcaption>
+							</figure>
+						</article>
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<div class="">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Output_03.gif" alt="Image" class="img-fluid tm-gallery-img" /> -->
+									<img src="https://gw.alicdn.com/imgextra/i3/O1CN01klDkvU1CNeApj04Hn_!!6000000000069-1-tps-256-256.gif" alt="Image" class="img-fluid tm-gallery-img" />
+								</div>	
+								<div class="w-1/4 max-h-50 condition_img" style="display: flex">
+									<!-- <img src="../videocomposer_source/videos/Fig12_Condition_03.gif"/> -->
+									<img src="https://gw.alicdn.com/imgextra/i2/O1CN01ebhOyu1xIPaLsgJX9_!!6000000006420-1-tps-256-256.gif"/>
+									<!-- <img src="../videocomposer_source/videos/Fig08_02_SImage.png"/> -->
+								</div>
+								<figcaption>
+									<!-- <h4 class="tm-gallery-title"></h4> -->
+									<p class="tm-gallery-description">“Ripe cherry tomatoes fall into a bowl of water slow motion”</p>
+								</figcaption>
+							</figure>
+						</article>
+					</div> <!-- gallery page 1 -->
+				</div>
+
+			</div>
+
+
+
+			<div class="tm-section tm-container-inner">
+				<div class="row">
+					<div class="col-md-6">
+						<figure class="tm-description-figure">
+							<!-- <img src="../videocomposer_source/videos/Fig00_01_Logo_01.jpg" alt="Image" class="img-fluid" /> -->
+							<img src="https://gw.alicdn.com/imgextra/i3/O1CN01UFj80E23LyMSi4Ip3_!!6000000007240-0-tps-1071-456.jpg" alt="Image" class="img-fluid" />
+						</figure>
+					</div>
+					<div class="col-md-6">
+						<div class="tm-description-box"> 
+							<h4 class="tm-gallery-title" style="font-size: 1.5rem;">More>></h4>
+							<p class="tm-mb-45">
+								<!-- More meaningful applications will continue to be explored. <br/> -->
+								If you are seeking an exhilarating challenge and the chance to collaborate with AIGC and large-scale pretraining, then you have come to the right place. 
+								We are searching for talented, motivated, and imaginative researchers to join our team. If you are interested, please don't hesitate to send us your resume via email 
+								<a style="color: darkgreen; font-size: 1.4rem;"> yingya.zyy@alibaba-inc.com </a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="tm-footer text-center">
+			<p>Copyright &copy; Alibaba Group 
+            
+            | Authors: <a rel="nofollow">FVI Team</a></p>
+		</footer>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/parallax.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+	</script>
+</body>
+</html>

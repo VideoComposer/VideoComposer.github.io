@@ -496,7 +496,7 @@ p, address {
 }
 
 
-.ts_style_link {
+.sw_style_link {
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -507,8 +507,8 @@ p, address {
 }
 
 
-.ts_style_link.active,
-.ts_style_link:hover {
+.sw_style_link.active,
+.sw_style_link:hover {
   background-color: #2F956D;
   color: white;
 }

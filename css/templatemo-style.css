@@ -495,6 +495,24 @@ p, address {
   color: white;
 }
 
+
+.ts_style_link {
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #2F956D;
+  background-color: transparent;
+}
+
+
+.ts_style_link.active,
+.ts_style_link:hover {
+  background-color: #2F956D;
+  color: white;
+}
+
 .tm-description-figure {
   text-align: center;  
 }
